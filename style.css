@@ -2,13 +2,14 @@ body {
     font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
-    background: linear-gradient(to right bottom, #4CAF50, #2196F3); /* Nền gradient xanh lá-xanh dương */
+    background: linear-gradient(to right bottom, #4CAF50, #2196F3);
     color: #333;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    overflow: hidden; /* Ẩn thanh cuộn khi tuyết rơi ra ngoài */
+    /* overflow: hidden; */ /* Xóa hoặc comment dòng này đi */
+    overflow-x: hidden; /* Chỉ khóa chiều ngang để không bị lệch web */
     position: relative;
 }
 

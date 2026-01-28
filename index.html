@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hoàng Kun - Cyber Bio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <title>Hoàng Kun - Fire Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --neon-blue: #00f3ff;
-            --neon-pink: #ff00ff;
-            --bg-dark: #050505;
+            --fire-color: #ff4d00;
+            --fire-glow: #ffae00;
+            --bg-dark: #0a0a0a;
         }
 
         body {
@@ -21,160 +21,189 @@
             display: flex;
             justify-content: center;
             min-height: 100vh;
-            overflow-x: hidden;
+            overflow: hidden; /* Để lửa không bị cuộn trang */
         }
 
-        #bg-canvas {
+        /* Hiệu ứng lửa nền */
+        #fire-canvas {
             position: fixed;
-            top: 0; left: 0;
+            bottom: 0;
+            left: 0;
             z-index: 1;
+            filter: blur(2px);
         }
 
         .container {
             position: relative;
             z-index: 10;
             width: 100%;
-            max-width: 420px;
-            padding: 50px 20px;
+            max-width: 400px;
+            padding: 60px 20px;
             text-align: center;
         }
 
-        /* Avatar RGB Xoay */
-        .avatar-wrapper {
+        /* Avatar vòng tròn lửa xoay */
+        .avatar-box {
             position: relative;
-            width: 120px;
-            height: 120px;
-            margin: 0 auto 20px;
-            padding: 5px;
-            background: linear-gradient(90deg, var(--neon-blue), var(--neon-pink), var(--neon-blue));
-            background-size: 200%;
+            width: 130px;
+            height: 130px;
+            margin: 0 auto 25px;
             border-radius: 50%;
-            animation: rotateRGB 3s linear infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 30px rgba(255, 77, 0, 0.4);
         }
 
-        @keyframes rotateRGB {
-            0% { background-position: 0%; }
-            100% { background-position: 200%; }
-        }
-
-        .avatar-wrapper img {
+        .avatar-box::before {
+            content: '';
+            position: absolute;
             width: 100%;
             height: 100%;
             border-radius: 50%;
+            border: 4px dashed var(--fire-color);
+            animation: rotateFire 5s linear infinite;
+        }
+
+        @keyframes rotateFire {
+            100% { transform: rotate(360deg); }
+        }
+
+        .avatar-box img {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
             object-fit: cover;
-            border: 2px solid var(--bg-dark);
+            border: 2px solid var(--fire-glow);
         }
 
         h1 {
-            font-family: 'Orbitron', sans-serif;
+            font-family: 'Oswald', sans-serif;
+            font-size: 32px;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--neon-blue);
-            text-shadow: 0 0 10px var(--neon-blue);
-            margin: 10px 0;
+            margin: 0;
+            background: linear-gradient(to bottom, #fff, var(--fire-glow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 5px 15px rgba(255, 174, 0, 0.3);
         }
 
         .tagline {
-            font-size: 13px;
+            font-size: 14px;
             color: #888;
-            margin-bottom: 30px;
-            letter-spacing: 1px;
+            margin: 10px 0 35px;
+            letter-spacing: 2px;
         }
 
-        /* Nút bấm kiểu Cyber */
-        .links {
+        /* Nút bấm kiểu Inferno */
+        .link-list {
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 18px;
         }
 
-        .link-card {
-            position: relative;
-            padding: 18px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(0, 243, 255, 0.3);
-            border-radius: 4px;
+        .link-btn {
+            background: rgba(20, 20, 20, 0.8);
+            border: 1px solid rgba(255, 77, 0, 0.3);
+            padding: 16px;
+            border-radius: 8px;
             color: white;
             text-decoration: none;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: 0.4s;
+            transition: 0.3s all;
+            position: relative;
             overflow: hidden;
         }
 
-        .link-card:hover {
-            background: rgba(0, 243, 255, 0.1);
-            border-color: var(--neon-blue);
-            box-shadow: 0 0 20px rgba(0, 243, 255, 0.4);
-            transform: skewX(-5deg);
+        .link-btn:hover {
+            border-color: var(--fire-glow);
+            box-shadow: 0 0 25px rgba(255, 77, 0, 0.5);
+            transform: scale(1.05);
+            background: rgba(255, 77, 0, 0.1);
         }
 
-        /* Hiệu ứng quét sáng qua nút */
-        .link-card::before {
+        /* Hiệu ứng nhiệt bên dưới nút */
+        .link-btn::after {
             content: '';
             position: absolute;
-            top: 0; left: -100%;
-            width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 243, 255, 0.4), transparent);
-            transition: 0.5s;
+            bottom: 0; left: 0;
+            width: 100%; height: 2px;
+            background: var(--fire-glow);
+            box-shadow: 0 0 10px var(--fire-glow);
+            transform: scaleX(0);
+            transition: 0.3s;
         }
 
-        .link-card:hover::before {
-            left: 100%;
+        .link-btn:hover::after {
+            transform: scaleX(1);
         }
-
     </style>
 </head>
 <body>
 
-    <canvas id="bg-canvas"></canvas>
+    <canvas id="fire-canvas"></canvas>
 
     <div class="container">
-        <div class="avatar-wrapper">
+        <div class="avatar-box">
             <img src="https://vinasport.com.vn/wp-content/uploads/2020/03/Logo-G2-eSports.jpg" alt="Hoàng Kun">
         </div>
         
         <h1>Hoàng Kun</h1>
-        <div class="tagline">G2 ESPORTS FAN | TECH ENTHUSIAST</div>
+        <div class="tagline">G2 INFERNO | FIRE & TECH</div>
 
-        <div class="links">
-            <a href="https://www.facebook.com/Nvh12072006" class="link-card" target="_blank">Facebook Interface</a>
-            <a href="https://zalo.me/84788265513" class="link-card" target="_blank">Access Zalo</a>
-            <a href="https://tiktok.com/@hpdbox" class="link-card" target="_blank">TikTok Stream</a>
-            <a href="mailto:hoangvb12072006@gmail.com" class="link-card">Send Transmission (Email)</a>
+        <div class="link-list">
+            <a href="https://www.facebook.com/Nvh12072006" class="link-btn" target="_blank">Facebook Command</a>
+            <a href="https://zalo.me/84788265513" class="link-btn" target="_blank">Private Zalo</a>
+            <a href="https://tiktok.com/@hpdbox" class="link-btn" target="_blank">TikTok Stream</a>
+            <a href="mailto:hoangvb12072006@gmail.com" class="link-btn">Direct Email</a>
         </div>
     </div>
 
     <script>
-        const canvas = document.getElementById('bg-canvas');
+        const canvas = document.getElementById('fire-canvas');
         const ctx = canvas.getContext('2d');
-        let particles = [];
+        let width, height, flames = [];
 
         function init() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            particles = [];
-            for(let i=0; i<60; i++) {
-                particles.push({
-                    x: Math.random() * canvas.width,
-                    y: Math.random() * canvas.height,
-                    size: Math.random() * 2,
-                    speed: Math.random() * 0.5 + 0.2
-                });
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+            flames = [];
+        }
+
+        class Flame {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = height + Math.random() * 100;
+                this.size = Math.random() * 30 + 10;
+                this.speed = Math.random() * 2 + 1;
+                this.opacity = 1;
+                this.color = Math.random() > 0.5 ? '#ff4d00' : '#ffae00';
+            }
+            draw() {
+                ctx.globalAlpha = this.opacity;
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+            update() {
+                this.y -= this.speed;
+                this.x += Math.sin(this.y * 0.05) * 1;
+                this.opacity -= 0.005;
+                if (this.size > 0.5) this.size -= 0.1;
             }
         }
 
         function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = '#00f3ff';
-            particles.forEach(p => {
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-                ctx.fill();
-                p.y -= p.speed;
-                if(p.y < 0) p.y = canvas.height;
-            });
+            ctx.clearRect(0, 0, width, height);
+            if (flames.length < 100) flames.push(new Flame());
+            
+            for (let i = flames.length - 1; i >= 0; i--) {
+                flames[i].update();
+                flames[i].draw();
+                if (flames[i].opacity <= 0) flames.splice(i, 1);
+            }
             requestAnimationFrame(animate);
         }
 

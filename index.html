@@ -3,41 +3,169 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trang Giới Thiệu Của Hoàng Kun</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <title>Hoàng Kun - Bio Link</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #00d2ff;
+            --bg-gradient: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-gradient);
+            color: white;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Container chính giữa màn hình */
+        .bio-container {
+            width: 100%;
+            max-width: 400px;
+            padding: 40px 20px;
+            text-align: center;
+            z-index: 10;
+        }
+
+        /* Ảnh đại diện tròn có viền phát sáng */
+        .profile-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 3px solid var(--primary-color);
+            padding: 5px;
+            margin-bottom: 15px;
+            box-shadow: 0 0 15px rgba(0, 210, 255, 0.5);
+            object-fit: cover;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin: 10px 0;
+            font-weight: 700;
+        }
+
+        .username {
+            font-size: 14px;
+            color: #aaa;
+            margin-bottom: 25px;
+            display: block;
+        }
+
+        /* Danh sách các nút link */
+        .links-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .link-item {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 16px;
+            border-radius: 12px;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Hiệu ứng khi lướt chuột qua nút */
+        .link-item:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.03);
+            border-color: var(--primary-color);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Hiệu ứng tuyết rơi */
+        canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+    </style>
 </head>
 <body>
-    <div id="snowflake-container"></div> 
-    <div class="container">
-        <div class="profile-card">
-            <div class="profile-picture">
-                <img src="https://vinasport.com.vn/wp-content/uploads/2020/03/Logo-G2-eSports.jpg" alt="Ảnh đại diện của Hoàng Kun">
-            </div>
-            <h1>Xin chào, tôi là Hoàng Kun</h1>
-            <p class="tagline">Một người đam mê Công nghệ & Gaming</p>
 
-            <p>
-                Tôi rất vui được chia sẻ một chút về bản thân. Tôi yêu thích việc khám phá những điều mới mẻ và luôn tìm cách để học hỏi và phát triển. Trong thời gian rảnh, tôi thường <b>Chơi Game</b>, <b>Học Hỏi</b> và <b>Xem Phim</b>.
-            </p>
+    <canvas id="snowCanvas"></canvas>
 
-            <div class="social-links">
-                <h2>Kết nối với tôi ở đây nhé</h2>
-                <ul>
-                    <li><a href="https://www.facebook.com/Nvh12072006" target="_blank">Facebook</a></li>
-                    <li><a href="https://zalo.me/84788265513" target="_blank">Zalo</a></li>
-                    <li><a href="https://tiktok.com/@hpdbox" target="_blank">Tiktok</a></li>
-                </ul>
-            </div>
+    <div class="bio-container">
+        <img src="https://vinasport.com.vn/wp-content/uploads/2020/03/Logo-G2-eSports.jpg" alt="Hoàng Kun" class="profile-img">
+        
+        <h1>Hoàng Kun</h1>
+        <span class="username">@hpdbox | Gaming & Tech</span>
 
-            <p class="contact-info">
-                Bạn có thể liên hệ với tôi qua email: <a href="mailto:hoangvb12072006@gmail.com">hoangvb12072006@gmail.com</a>
-            </p>
+        <div class="links-list">
+            <a href="https://www.facebook.com/Nvh12072006" class="link-item" target="_blank">Facebook cá nhân</a>
+            <a href="https://zalo.me/84788265513" class="link-item" target="_blank">Kết nối qua Zalo</a>
+            <a href="https://tiktok.com/@hpdbox" class="link-item" target="_blank">Kênh TikTok cá nhân</a>
+            <a href="mailto:hoangvb12072006@gmail.com" class="link-item">Gửi Email liên hệ</a>
         </div>
     </div>
 
-    <script src="script.js"></script>
-</body>
-</html>
+    <script>
+        // Code xử lý tuyết rơi
+        const canvas = document.getElementById('snowCanvas');
+        const ctx = canvas.getContext('2d');
+        let width, height, particles;
+
+        function init() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+            particles = [];
+            for (let i = 0; i < 80; i++) {
+                particles.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    r: Math.random() * 3 + 1,
+                    d: Math.random() * 1
+                });
+            }
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, width, height);
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
+            ctx.beginPath();
+            for (let p of particles) {
+                ctx.moveTo(p.x, p.y);
+                ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+            }
+            ctx.fill();
+            update();
+        }
+
+        function update() {
+            for (let p of particles) {
+                p.y += Math.cos(p.d) + 1 + p.r / 2;
+                p.x += Math.sin(p.d) * 1;
+                if (p.y > height) {
+                    p.y = -10;
+                    p.x = Math.random() * width;
+                }
+            }
+        }
+
+        function loop() {
+            draw();
+            requestAnimationFrame(loop);
+        }
+
+        window.addEventListener('resize', init);
+        init();
+        loop();
+    </script>
 </body>
 </html>

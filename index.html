@@ -3,55 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hoàng Kun - Hai Phong Devil</title>
+    <title>Hoàng Kun - Link List</title>
     <style>
+        /* 1. NỀN VÀ TUYẾT RƠI */
         body {
             margin: 0;
             padding: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: radial-gradient(circle, #e0e4e8, #c8d0d8);
+            background: linear-gradient(to bottom, #0f2027, #203a43, #2c5364); /* Màu nền đêm đông */
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            color: #333;
+            overflow: hidden;
+            color: white;
         }
 
-        .container {
+        #snow-container {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            max-width: 450px;
-            text-align: center;
-            padding: 20px;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
         }
 
-        /* Header gỗ pixel */
-        .header-board {
-            background-color: #5d4037;
-            border: 6px solid #3e2723;
-            border-radius: 15px;
-            padding: 20px;
+        .snowflake {
+            position: absolute;
+            top: -10px;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.8;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            to { transform: translateY(105vh); }
+        }
+
+        /* 2. BỐ CỤC CHÍNH */
+        .container {
             position: relative;
-            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
-            margin-bottom: 40px;
+            z-index: 1;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
         }
 
-        .header-board h1 {
-            color: #ffca28;
+        /* 3. KHUNG HEADER MỚI (Glassmorphism) */
+        .header-box {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 30px 20px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+        }
+
+        .header-box h1 {
             margin: 0;
-            font-size: 2.2rem;
+            font-size: 28px;
+            letter-spacing: 3px;
+            color: #f1c40f; /* Màu vàng Gold rực rỡ */
+            text-shadow: 0 0 10px rgba(241, 196, 15, 0.5);
+        }
+
+        .header-box p {
+            margin: 10px 0 0;
+            font-size: 14px;
+            opacity: 0.8;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            text-shadow: 2px 2px #000;
         }
 
-        .header-board p {
-            color: #fff;
-            margin: 5px 0 0;
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
-
-        /* Danh sách Link */
+        /* 4. GIỮ NGUYÊN CÁC THANH LINK */
         .link-list {
             display: flex;
             flex-direction: column;
@@ -60,87 +86,84 @@
 
         .link-item {
             background: white;
-            border-radius: 50px;
-            padding: 12px 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            text-decoration: none;
             color: #333;
-            font-weight: 600;
+            text-decoration: none;
+            padding: 15px 20px;
+            border-radius: 50px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             transition: transform 0.2s, box-shadow 0.2s;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
 
         .link-item:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+            transform: scale(1.03);
+            box-shadow: 0 6px 20px rgba(255,255,255,0.2);
         }
 
-        .link-content {
+        .link-item span {
             display: flex;
             align-items: center;
             gap: 10px;
-            overflow: hidden;
-            white-space: nowrap;
-            text-overflow: ellipsis;
-        }
-
-        .icon-arrow {
-            color: #ccc;
-            font-weight: bold;
-        }
-
-        /* Các icon giả lập (có thể thay bằng ảnh thật) */
-        .emoji {
-            font-size: 1.2rem;
         }
     </style>
 </head>
 <body>
 
+    <div id="snow-container"></div>
+
     <div class="container">
-        <div class="header-board">
+        <div class="header-box">
             <h1>HOÀNG KUN</h1>
-            <p>HAI PHONG DEVIL</p>
+            <p>Hai Phong Devil</p>
         </div>
 
-        <h3>Link-List</h3>
+        <p style="margin-bottom: 20px; font-weight: 300;">Link-List</p>
 
         <div class="link-list">
             <a href="#" class="link-item">
-                <div class="link-content">
-                    <span class="emoji">🔵</span>
-                    <span>Link của tôi (PNG)</span>
-                </div>
-                <span class="icon-arrow">&gt;</span>
+                <span>🔵 Link của tôi (PNG)</span>
+                <span>&gt;</span>
             </a>
-
             <a href="#" class="link-item">
-                <div class="link-content">
-                    <span class="emoji">🔥</span>
-                    <span>WEBSITE CỦA TÔI 🔥</span>
-                </div>
-                <span class="icon-arrow">&gt;</span>
+                <span>🔥 WEBSITE CỦA TÔI 🔥</span>
+                <span>&gt;</span>
             </a>
-
             <a href="#" class="link-item">
-                <div class="link-content">
-                    <span class="emoji">🔥</span>
-                    <span>FACEBOOK</span>
-                </div>
-                <span class="icon-arrow">&gt;</span>
+                <span>🔥 FACEBOOK</span>
+                <span>&gt;</span>
             </a>
-
             <a href="#" class="link-item">
-                <div class="link-content">
-                    <span class="emoji">🔥</span>
-                    <span>LINK-BTN</span>
-                </div>
-                <span class="icon-arrow">&gt;</span>
+                <span>🔥 LINK-BTN</span>
+                <span>&gt;</span>
             </a>
         </div>
     </div>
 
+    <script>
+        // Script tạo tuyết rơi ngẫu nhiên
+        function createSnow() {
+            const container = document.getElementById('snow-container');
+            const flake = document.createElement('div');
+            const size = Math.random() * 5 + 2 + 'px';
+            
+            flake.classList.add('snowflake');
+            flake.style.left = Math.random() * 100 + '%';
+            flake.style.width = size;
+            flake.style.height = size;
+            flake.style.animationDuration = Math.random() * 3 + 2 + 's';
+            flake.style.opacity = Math.random();
+            
+            container.appendChild(flake);
+            
+            setTimeout(() => {
+                flake.remove();
+            }, 5000);
+        }
+
+        setInterval(createSnow, 100);
+    </script>
 </body>
 </html>

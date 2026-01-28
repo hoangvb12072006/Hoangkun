@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hoàng Kun - Fire & Snow Custom</title>
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=VT323&display=swap" rel="stylesheet">
+    <title>Hoàng Kun - Fire & Snow Bio</title>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&family=Oswald:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <style>
         :root {
             --fire-color: #ff4d00;
             --fire-glow: #ffae00;
             --bg-dark: #050505;
             --wood: #5d4037;
+            --border-pixel: #3e2723;
         }
 
         body {
@@ -25,6 +26,7 @@
             overflow-x: hidden;
         }
 
+        /* 1. NỀN TUYẾT RƠI (Canvas từ code cũ) */
         #snow-canvas {
             position: fixed;
             top: 0;
@@ -37,61 +39,68 @@
             position: relative;
             z-index: 10;
             width: 100%;
-            max-width: 400px;
-            padding: 80px 20px; /* Tăng padding top để lửa không bị mất */
+            max-width: 420px;
+            padding: 100px 20px 50px; /* Tăng padding trên để lửa ko bị sát mép màn hình */
             text-align: center;
         }
 
-        /* --- PHẦN KHUNG GỖ VÀ LỬA MỚI --- */
+        /* 2. HEADER BẢNG GỖ VỚI LỬA LỒI RA NGOÀI */
         .pixel-header {
             position: relative;
             background: var(--wood);
-            border: 4px solid #3e2723;
-            padding: 20px;
-            margin-bottom: 30px;
-            box-shadow: 0 8px 0 #2d1b18;
+            border: 5px solid var(--border-pixel);
+            padding: 25px 15px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 0 #2d1b18; /* Tạo độ dày cho bảng */
         }
 
-        /* Ngọn lửa lòi ra ngoài */
+        /* Ngọn lửa lung linh */
         .flame {
             position: absolute;
-            top: -25px; /* Đẩy lên trên mép */
-            width: 30px;
-            height: 40px;
-            z-index: 11;
+            top: -30px; /* Nhấc cao lên khỏi cạnh trên */
+            width: 35px;
+            height: 45px;
             background: radial-gradient(circle at 50% 100%, #fff, #ffeb3b, #ff4d00);
             border-radius: 50% 50% 20% 20%;
             filter: blur(1px);
-            animation: flicker 0.6s infinite alternate;
+            z-index: 15;
+            animation: flameAnim 0.7s infinite alternate ease-in-out;
         }
 
-        .flame-left { left: -15px; }  /* Lòi ra bên trái */
-        .flame-right { right: -15px; } /* Lòi ra bên phải */
+        .flame-left { left: -20px; }  /* Lòi hẳn ra ngoài bên trái */
+        .flame-right { right: -20px; } /* Lòi hẳn ra ngoài bên phải */
 
-        @keyframes flicker {
+        @keyframes flameAnim {
             0% { 
                 transform: scale(1) translateY(0); 
-                box-shadow: 0 0 10px #ff4d00;
-                filter: brightness(1);
+                box-shadow: 0 0 15px #ff4d00;
+                filter: brightness(1) blur(1px);
             }
             100% { 
-                transform: scale(1.2) translateY(-5px); 
-                box-shadow: 0 0 25px #ffae00;
-                filter: brightness(1.3);
+                transform: scale(1.15) translateY(-8px); 
+                box-shadow: 0 0 30px #ffae00;
+                filter: brightness(1.3) blur(0.5px);
             }
         }
 
-        /* Tên trong khung gỗ */
         .pixel-header h1 {
-            font-family: 'VT323', monospace;
-            font-size: 35px;
+            font-family: 'VT323', monospace; /* Font kiểu pixel game */
+            font-size: 38px;
             margin: 0;
             color: #ffeb3b;
-            text-shadow: 2px 2px #000;
+            text-shadow: 3px 3px #000;
             letter-spacing: 2px;
+            text-transform: uppercase;
         }
 
-        /* --- GIỮ NGUYÊN STYLE CÁC NÚT CỦA BẠN --- */
+        .pixel-header .sub-text {
+            font-size: 13px;
+            color: #bcaaa4;
+            letter-spacing: 3px;
+            margin-top: 5px;
+        }
+
+        /* 3. DANH SÁCH LINK (Giữ style của bạn & thêm link website) */
         .link-list {
             display: flex;
             flex-direction: column;
@@ -101,7 +110,7 @@
         .link-btn {
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 77, 0, 0.3);
-            padding: 16px;
+            padding: 18px;
             border-radius: 12px;
             color: white;
             text-decoration: none;
@@ -114,14 +123,22 @@
             backdrop-filter: blur(8px);
         }
 
+        /* Nút Website mới làm đặc biệt hơn */
+        .btn-website {
+            border: 1px solid var(--fire-glow);
+            background: rgba(255, 174, 0, 0.15);
+        }
+
         .link-btn:hover {
             transform: scale(1.05);
-            background: rgba(255, 77, 0, 0.2);
+            background: rgba(255, 77, 0, 0.25);
+            border-color: var(--fire-glow);
             box-shadow: 0 0 25px rgba(255, 77, 0, 0.6);
         }
 
         .fire-emoji {
             filter: drop-shadow(0 0 5px orange);
+            font-size: 20px;
         }
     </style>
 </head>
@@ -134,24 +151,35 @@
             <div class="flame flame-left"></div>
             <div class="flame flame-right"></div>
             <h1>⛺ HOÀNG KUN</h1>
-            <div style="font-size: 12px; color: #888; margin-top: 5px;">HAI PHONG DEVIL</div>
+            <div class="sub-text">HAI PHONG DEVIL</div>
         </div>
 
         <div class="link-list">
-            <a href="#" class="link-btn">
+            <a href="https://hoangvb12072006.github.io/web-hoangkun/?fbclid=IwY2xjawPmTLxleHRuA2FlbQIxMABicmlkETBlQ2xtckZ0UG45WHg0aTlCc3J0YwZhcHBfaWQQMjIyMDM5MTc4ODIwMDg5MgABHvqQAbOTao39t02POSXhgBYx_IWsXMSyzmIKvQVRaA33orxUDl3rWU9XrqQY_aem_Na3dwVDNzdSulYvgn2ZMcQ#" 
+               class="link-btn btn-website" target="_blank">
+                <span class="fire-emoji">🔥</span> WEBSITE CỦA TÔI <span class="fire-emoji">🔥</span>
+            </a>
+
+            <a href="https://www.facebook.com/Nvh12072006" class="link-btn" target="_blank">
                 <span class="fire-emoji">🔥</span> FACEBOOK <span class="fire-emoji">🔥</span>
             </a>
-            <a href="#" class="link-btn">
+
+            <a href="https://zalo.me/84788265513" class="link-btn" target="_blank">
                 <span class="fire-emoji">🔥</span> ZALO <span class="fire-emoji">🔥</span>
             </a>
-            <a href="#" class="link-btn">
+
+            <a href="https://tiktok.com/@hpdbox" class="link-btn" target="_blank">
                 <span class="fire-emoji">🔥</span> TIKTOK <span class="fire-emoji">🔥</span>
+            </a>
+
+            <a href="mailto:hoangvb12072006@gmail.com" class="link-btn">
+                <span class="fire-emoji">🔥</span> EMAIL <span class="fire-emoji">🔥</span>
             </a>
         </div>
     </div>
 
     <script>
-        // Copy phần script Tuyết rơi cũ của bạn vào đây là chạy hoàn hảo
+        // SCRIPT TUYẾT RƠI (Copy chuẩn từ code cũ của bạn)
         const canvas = document.getElementById('snow-canvas');
         const ctx = canvas.getContext('2d');
         let width, height, snowflakes = [];

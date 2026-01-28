@@ -1,1 +1,161 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to right bottom, #4CAF50, #2196F3); /* Nền gradient xanh lá-xanh dương */
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden; /* Ẩn thanh cuộn khi tuyết rơi ra ngoài */
+    position: relative;
+}
 
+/* Hiệu ứng tuyết rơi */
+#snowflake-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Không chặn click chuột */
+    z-index: 0; /* Đảm bảo tuyết rơi ở phía sau nội dung */
+}
+
+.snowflake {
+    position: absolute;
+    background-color: #ffffff; /* Màu tuyết trắng */
+    border-radius: 50%;
+    opacity: 0.8;
+    animation: fall linear infinite;
+    z-index: 1; /* Tuyết nằm trên nền */
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(100vh);
+    }
+}
+
+
+.container {
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.95); /* Nền trắng hơi trong suốt */
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    position: relative;
+    z-index: 10; /* Đảm bảo nội dung nằm trên tuyết */
+}
+
+.profile-card {
+    padding: 20px;
+}
+
+.profile-picture {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%; /* Làm cho ảnh tròn */
+    overflow: hidden;
+    margin: 0 auto 20px;
+    border: 5px solid #FFD700; /* Viền vàng cho ảnh đại diện */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.profile-picture img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Đảm bảo ảnh vừa khung mà không bị méo */
+}
+
+h1 {
+    font-family: 'Pacifico', cursive;
+    color: #E91E63; /* Màu hồng */
+    font-size: 2.8em;
+    margin-bottom: 10px;
+}
+
+.tagline {
+    font-size: 1.2em;
+    color: #607D8B;
+    margin-bottom: 25px;
+    font-style: italic;
+}
+
+p {
+    font-size: 1.1em;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    color: #555;
+}
+
+.social-links {
+    margin-top: 30px;
+    border-top: 1px solid #eee;
+    padding-top: 20px;
+}
+
+.social-links h2 {
+    font-family: 'Roboto', sans-serif;
+    color: #4CAF50; /* Màu xanh lá cây */
+    font-size: 1.8em;
+    margin-bottom: 15px;
+}
+
+.social-links ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.social-links li {
+    background-color: #2196F3; /* Màu xanh dương */
+    padding: 10px 20px;
+    border-radius: 25px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.social-links li:hover {
+    background-color: #1976D2; /* Xanh dương đậm hơn khi hover */
+    transform: translateY(-3px);
+}
+
+.social-links a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.contact-info {
+    margin-top: 30px;
+    font-size: 1em;
+    color: #777;
+}
+
+.contact-info a {
+    color: #E91E63;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.contact-info a:hover {
+    text-decoration: underline;
+}
+
+/* Kích thước tuyết rơi ngẫu nhiên */
+.snowflake:nth-child(2n) {
+    background-color: #ddf;
+}
+.snowflake:nth-child(3n) {
+    background-color: #eef;
+}
+.snowflake:nth-child(4n) {
+    background-color: #fdd; /* Một chút màu hồng nhạt */
+}

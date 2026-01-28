@@ -3,19 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hoàng Kun - Bio Link</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>Hoàng Kun - Cyber Bio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #00d2ff;
-            --bg-gradient: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            --neon-blue: #00f3ff;
+            --neon-pink: #ff00ff;
+            --bg-dark: #050505;
         }
 
         body {
             margin: 0;
             padding: 0;
+            background-color: var(--bg-dark);
             font-family: 'Inter', sans-serif;
-            background: var(--bg-gradient);
             color: white;
             display: flex;
             justify-content: center;
@@ -23,149 +24,163 @@
             overflow-x: hidden;
         }
 
-        /* Container chính giữa màn hình */
-        .bio-container {
-            width: 100%;
-            max-width: 400px;
-            padding: 40px 20px;
-            text-align: center;
-            z-index: 10;
+        #bg-canvas {
+            position: fixed;
+            top: 0; left: 0;
+            z-index: 1;
         }
 
-        /* Ảnh đại diện tròn có viền phát sáng */
-        .profile-img {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            border: 3px solid var(--primary-color);
+        .container {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 420px;
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        /* Avatar RGB Xoay */
+        .avatar-wrapper {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 20px;
             padding: 5px;
-            margin-bottom: 15px;
-            box-shadow: 0 0 15px rgba(0, 210, 255, 0.5);
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-pink), var(--neon-blue));
+            background-size: 200%;
+            border-radius: 50%;
+            animation: rotateRGB 3s linear infinite;
+        }
+
+        @keyframes rotateRGB {
+            0% { background-position: 0%; }
+            100% { background-position: 200%; }
+        }
+
+        .avatar-wrapper img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
             object-fit: cover;
+            border: 2px solid var(--bg-dark);
         }
 
         h1 {
-            font-size: 24px;
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--neon-blue);
+            text-shadow: 0 0 10px var(--neon-blue);
             margin: 10px 0;
-            font-weight: 700;
         }
 
-        .username {
-            font-size: 14px;
-            color: #aaa;
-            margin-bottom: 25px;
-            display: block;
+        .tagline {
+            font-size: 13px;
+            color: #888;
+            margin-bottom: 30px;
+            letter-spacing: 1px;
         }
 
-        /* Danh sách các nút link */
-        .links-list {
+        /* Nút bấm kiểu Cyber */
+        .links {
             display: flex;
             flex-direction: column;
-            gap: 16px;
+            gap: 20px;
         }
 
-        .link-item {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 16px;
-            border-radius: 12px;
+        .link-card {
+            position: relative;
+            padding: 18px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(0, 243, 255, 0.3);
+            border-radius: 4px;
             color: white;
             text-decoration: none;
             font-weight: 600;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.4s;
+            overflow: hidden;
         }
 
-        /* Hiệu ứng khi lướt chuột qua nút */
-        .link-item:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: scale(1.03);
-            border-color: var(--primary-color);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        .link-card:hover {
+            background: rgba(0, 243, 255, 0.1);
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.4);
+            transform: skewX(-5deg);
         }
 
-        /* Hiệu ứng tuyết rơi */
-        canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            pointer-events: none;
-            z-index: 1;
+        /* Hiệu ứng quét sáng qua nút */
+        .link-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 243, 255, 0.4), transparent);
+            transition: 0.5s;
         }
+
+        .link-card:hover::before {
+            left: 100%;
+        }
+
     </style>
 </head>
 <body>
 
-    <canvas id="snowCanvas"></canvas>
+    <canvas id="bg-canvas"></canvas>
 
-    <div class="bio-container">
-        <img src="https://vinasport.com.vn/wp-content/uploads/2020/03/Logo-G2-eSports.jpg" alt="Hoàng Kun" class="profile-img">
+    <div class="container">
+        <div class="avatar-wrapper">
+            <img src="https://vinasport.com.vn/wp-content/uploads/2020/03/Logo-G2-eSports.jpg" alt="Hoàng Kun">
+        </div>
         
         <h1>Hoàng Kun</h1>
-        <span class="username">@hpdbox | Gaming & Tech</span>
+        <div class="tagline">G2 ESPORTS FAN | TECH ENTHUSIAST</div>
 
-        <div class="links-list">
-            <a href="https://www.facebook.com/Nvh12072006" class="link-item" target="_blank">Facebook cá nhân</a>
-            <a href="https://zalo.me/84788265513" class="link-item" target="_blank">Kết nối qua Zalo</a>
-            <a href="https://tiktok.com/@hpdbox" class="link-item" target="_blank">Kênh TikTok cá nhân</a>
-            <a href="mailto:hoangvb12072006@gmail.com" class="link-item">Gửi Email liên hệ</a>
+        <div class="links">
+            <a href="https://www.facebook.com/Nvh12072006" class="link-card" target="_blank">Facebook Interface</a>
+            <a href="https://zalo.me/84788265513" class="link-card" target="_blank">Access Zalo</a>
+            <a href="https://tiktok.com/@hpdbox" class="link-card" target="_blank">TikTok Stream</a>
+            <a href="mailto:hoangvb12072006@gmail.com" class="link-card">Send Transmission (Email)</a>
         </div>
     </div>
 
     <script>
-        // Code xử lý tuyết rơi
-        const canvas = document.getElementById('snowCanvas');
+        const canvas = document.getElementById('bg-canvas');
         const ctx = canvas.getContext('2d');
-        let width, height, particles;
+        let particles = [];
 
         function init() {
-            width = canvas.width = window.innerWidth;
-            height = canvas.height = window.innerHeight;
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
             particles = [];
-            for (let i = 0; i < 80; i++) {
+            for(let i=0; i<60; i++) {
                 particles.push({
-                    x: Math.random() * width,
-                    y: Math.random() * height,
-                    r: Math.random() * 3 + 1,
-                    d: Math.random() * 1
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    size: Math.random() * 2,
+                    speed: Math.random() * 0.5 + 0.2
                 });
             }
         }
 
-        function draw() {
-            ctx.clearRect(0, 0, width, height);
-            ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
-            ctx.beginPath();
-            for (let p of particles) {
-                ctx.moveTo(p.x, p.y);
-                ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-            }
-            ctx.fill();
-            update();
-        }
-
-        function update() {
-            for (let p of particles) {
-                p.y += Math.cos(p.d) + 1 + p.r / 2;
-                p.x += Math.sin(p.d) * 1;
-                if (p.y > height) {
-                    p.y = -10;
-                    p.x = Math.random() * width;
-                }
-            }
-        }
-
-        function loop() {
-            draw();
-            requestAnimationFrame(loop);
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#00f3ff';
+            particles.forEach(p => {
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fill();
+                p.y -= p.speed;
+                if(p.y < 0) p.y = canvas.height;
+            });
+            requestAnimationFrame(animate);
         }
 
         window.addEventListener('resize', init);
         init();
-        loop();
+        animate();
     </script>
 </body>
 </html>

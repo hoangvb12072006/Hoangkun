@@ -3,29 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hoàng Kun - Fire & Snow</title>
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <title>Hoàng Kun - Khu Cắm Trại Pixel</title>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
     <style>
         :root {
-            --fire-color: #ff4d00;
-            --fire-glow: #ffae00;
-            --snow-color: rgba(255, 255, 255, 0.8);
-            --bg-dark: #050505;
+            --fire-color: #ffcc00;
+            --wood-dark: #4b3621;
+            --wood-light: #6d4c41;
+            --border-pixel: #2d1b18;
         }
 
         body {
             margin: 0;
             padding: 0;
-            background-color: var(--bg-dark);
-            font-family: 'Inter', sans-serif;
-            color: white;
+            background-color: #1a1a1a;
+            font-family: 'VT323', monospace; /* Font kiểu game pixel */
             display: flex;
             justify-content: center;
-            min-height: 100vh;
-            overflow-x: hidden;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
         }
 
-        /* Nền tuyết rơi */
+        /* Giữ nguyên Canvas Tuyết của bạn */
         #snow-canvas {
             position: fixed;
             top: 0;
@@ -34,142 +34,185 @@
             pointer-events: none;
         }
 
-        .container {
+        /* Container chính chứa bảng */
+        .game-wrapper {
             position: relative;
             z-index: 10;
-            width: 100%;
-            max-width: 400px;
-            padding: 50px 20px;
-            text-align: center;
         }
 
-        /* Avatar viền lửa xoay */
-        .avatar-box {
+        /* Bảng Menu Gỗ */
+        .menu-board {
             position: relative;
-            width: 130px;
-            height: 130px;
-            margin: 0 auto 20px;
-            border-radius: 50%;
+            width: 380px;
+            background-color: var(--wood-light);
+            border: 6px solid var(--border-pixel);
+            padding: 20px;
+            box-shadow: 0 10px 0 var(--border-pixel);
+            image-rendering: pixelated;
+        }
+
+        /* Hai ngọn lửa lơ lửng bên ngoài */
+        .pixel-fire {
+            position: absolute;
+            width: 35px;
+            height: 45px;
+            background-color: #ffeb3b;
+            z-index: 20;
+            /* Tạo hình ngọn lửa pixel đơn giản bằng clip-path hoặc bạn thay bằng <img> */
+            clip-path: polygon(50% 0%, 80% 30%, 100% 60%, 80% 100%, 20% 100%, 0% 60%, 20% 30%);
+            animation: flameGlow 0.8s infinite alternate ease-in-out;
+        }
+
+        .fire-left {
+            top: -25px;
+            left: -20px;
+        }
+
+        .fire-right {
+            top: -25px;
+            right: -20px;
+        }
+
+        @keyframes flameGlow {
+            0% {
+                transform: translateY(0) scale(1);
+                filter: brightness(1) drop-shadow(0 0 5px #ff4d00);
+                background-color: #ffeb3b;
+            }
+            100% {
+                transform: translateY(-8px) scale(1.1);
+                filter: brightness(1.3) drop-shadow(0 0 15px #ff4d00);
+                background-color: #ff9800;
+            }
+        }
+
+        /* Nội dung bên trong bảng */
+        .title {
+            color: #ffeb3b;
+            font-size: 32px;
+            margin: 0 0 15px 0;
+            text-shadow: 2px 2px #000;
             display: flex;
             justify-content: center;
             align-items: center;
+            gap: 10px;
         }
 
-        .avatar-box::before {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            border: 3px dashed var(--fire-color);
-            animation: rotateFire 4s linear infinite;
-            box-shadow: 0 0 20px var(--fire-color);
+        .character-info {
+            background: rgba(0, 0, 0, 0.3);
+            border: 3px solid var(--border-pixel);
+            padding: 10px;
+            margin-bottom: 15px;
         }
 
-        @keyframes rotateFire {
-            100% { transform: rotate(360deg); }
-        }
-
-        .avatar-box img {
-            width: 110px;
-            height: 110px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid #fff;
-        }
-
-        h1 {
-            font-family: 'Oswald', sans-serif;
-            font-size: 32px;
-            margin: 10px 0 5px;
-            background: linear-gradient(to bottom, #fff, var(--fire-glow));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .location {
-            font-size: 13px;
-            color: #888;
-            letter-spacing: 2px;
-            margin-bottom: 30px;
-        }
-
-        /* Nút bấm Bio có lửa 2 bên */
-        .link-list {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .link-btn {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 77, 0, 0.3);
-            padding: 16px;
-            border-radius: 12px;
-            color: white;
-            text-decoration: none;
-            font-weight: 700;
-            text-transform: uppercase;
+        .info-row {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            transition: 0.3s all ease;
-            backdrop-filter: blur(8px);
+            font-size: 20px;
+            margin-bottom: 5px;
         }
 
-        .link-btn:hover {
-            transform: scale(1.05);
-            background: rgba(255, 77, 0, 0.2);
-            border-color: var(--fire-glow);
-            box-shadow: 0 0 25px rgba(255, 77, 0, 0.6);
+        .highlight { color: #4caf50; }
+        .name { color: #fff; font-weight: bold; }
+
+        /* Thanh EXP */
+        .exp-container {
+            height: 20px;
+            background: #222;
+            border: 2px solid #000;
+            position: relative;
+            margin-top: 10px;
+        }
+        .exp-bar {
+            width: 30%; /* Chỉnh % kinh nghiệm tại đây */
+            height: 100%;
+            background: #fff;
+        }
+        .exp-text {
+            position: absolute;
+            width: 100%;
+            top: 0;
+            font-size: 14px;
+            text-align: center;
+            color: #fff;
+            mix-blend-mode: difference;
         }
 
-        .fire-emoji {
-            opacity: 0;
-            transition: 0.3s;
-            filter: drop-shadow(0 0 5px orange);
+        /* Tài nguyên */
+        .resources {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            background: rgba(0,0,0,0.2);
+            padding: 10px;
+            margin-bottom: 20px;
         }
 
-        .link-btn:hover .fire-emoji {
-            opacity: 1;
-            animation: flicker 0.5s infinite alternate;
+        /* Nút bấm */
+        .btn-group {
+            display: flex;
+            gap: 8px;
         }
 
-        @keyframes flicker {
-            from { transform: scale(1); }
-            to { transform: scale(1.3); }
+        .btn {
+            flex: 1;
+            padding: 10px 5px;
+            border: none;
+            font-family: 'VT323', monospace;
+            font-size: 18px;
+            color: white;
+            cursor: pointer;
+            border-bottom: 4px solid rgba(0,0,0,0.3);
+            transition: 0.1s;
         }
+
+        .btn:active { transform: translateY(2px); border-bottom-width: 2px; }
+
+        .btn-start { background: #4caf50; }
+        .btn-bag { background: #fbc02d; }
+        .btn-quit { background: #e53935; }
+
     </style>
 </head>
 <body>
 
     <canvas id="snow-canvas"></canvas>
 
-    <div class="container">
-        <div class="avatar-box">
-            <img src="https://vinasport.com.vn/wp-content/uploads/2020/03/Logo-G2-eSports.jpg" alt="Hoàng Kun">
-        </div>
-        
-        <h1>Hoàng Kun</h1>
-        <div class="location">HAI PHONG DEVIL</div>
+    <div class="game-wrapper">
+        <div class="menu-board">
+            <div class="pixel-fire fire-left"></div>
+            <div class="pixel-fire fire-right"></div>
 
-        <div class="link-list">
-            <a href="https://www.facebook.com/Nvh12072006" class="link-btn" target="_blank">
-                <span class="fire-emoji">🔥</span> FACEBOOK <span class="fire-emoji">🔥</span>
-            </a>
-            <a href="https://zalo.me/84788265513" class="link-btn" target="_blank">
-                <span class="fire-emoji">🔥</span> ZALO <span class="fire-emoji">🔥</span>
-            </a>
-            <a href="https://tiktok.com/@hpdbox" class="link-btn" target="_blank">
-                <span class="fire-emoji">🔥</span> TIKTOK <span class="fire-emoji">🔥</span>
-            </a>
-            <a href="mailto:hoangvb12072006@gmail.com" class="link-btn">
-                <span class="fire-emoji">🔥</span> EMAIL <span class="fire-emoji">🔥</span>
-            </a>
+            <div class="title">⛺ KHU CẮM TRẠI</div>
+
+            <div class="character-info">
+                <div class="info-row">
+                    <span>CHIẾN BINH:<br><span class="name">HOANG KUN</span></span>
+                    <span style="text-align: right;">TRẠNG THÁI:<br><span class="highlight">🔥 ĐANG NGHỈ</span></span>
+                </div>
+                <div class="exp-container">
+                    <div class="exp-bar"></div>
+                    <div class="exp-text">LV.1 - 0/100 XP</div>
+                </div>
+            </div>
+
+            <div class="resources">
+                <div>💰 VÀNG: 0</div>
+                <div>💎 KIM CƯƠNG: 0</div>
+                <div>🪨 ĐÁ: 0</div>
+                <div>🪵 GỖ: 0</div>
+            </div>
+
+            <div class="btn-group">
+                <button class="btn btn-start">⚒️ BẮT ĐẦU</button>
+                <button class="btn btn-bag">📦 KHO ĐỒ</button>
+                <button class="btn btn-quit">➡️ THOÁT</button>
+            </div>
         </div>
     </div>
 
     <script>
+        // Giữ nguyên logic tuyết rơi của bạn
         const canvas = document.getElementById('snow-canvas');
         const ctx = canvas.getContext('2d');
         let width, height, snowflakes = [];

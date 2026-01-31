@@ -1,169 +1,103 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hoàng Kun - Link List</title>
-    <style>
-        /* 1. NỀN VÀ TUYẾT RƠI */
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(to bottom, #0f2027, #203a43, #2c5364); /* Màu nền đêm đông */
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            color: white;
-        }
-
-        #snow-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .snowflake {
-            position: absolute;
-            top: -10px;
-            background: white;
-            border-radius: 50%;
-            opacity: 0.8;
-            animation: fall linear infinite;
-        }
-
-        @keyframes fall {
-            to { transform: translateY(105vh); }
-        }
-
-        /* 2. BỐ CỤC CHÍNH */
-        .container {
-            position: relative;
-            z-index: 1;
-            width: 90%;
-            max-width: 400px;
-            text-align: center;
-        }
-
-        /* 3. KHUNG HEADER MỚI (Glassmorphism) */
-        .header-box {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 30px 20px;
-            border-radius: 20px;
-            margin-bottom: 30px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
-        }
-
-        .header-box h1 {
-            margin: 0;
-            font-size: 28px;
-            letter-spacing: 3px;
-            color: #f1c40f; /* Màu vàng Gold rực rỡ */
-            text-shadow: 0 0 10px rgba(241, 196, 15, 0.5);
-        }
-
-        .header-box p {
-            margin: 10px 0 0;
-            font-size: 14px;
-            opacity: 0.8;
-            text-transform: uppercase;
-        }
-
-        /* 4. GIỮ NGUYÊN CÁC THANH LINK */
-        .link-list {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .link-item {
-            background: white;
-            color: #333;
-            text-decoration: none;
-            padding: 15px 20px;
-            border-radius: 50px;
-            font-weight: bold;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: transform 0.2s, box-shadow 0.2s;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        }
-
-        .link-item:hover {
-            transform: scale(1.03);
-            box-shadow: 0 6px 20px rgba(255,255,255,0.2);
-        }
-
-        .link-item span {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="keywords" content="thiết kế website, bán source code, share source code, Trần Việt Anh, lập trình web" />
+  <meta name="author" content="Trần Việt Anh" />
+  <title>Trần Việt Anh - Thiết kế Website</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@600;800&display=swap" rel="stylesheet" />
 </head>
 <body>
-
-    <div id="snow-container"></div>
-
-    <div class="container">
-        <div class="header-box">
-            <h1>HOÀNG KUN</h1>
-            <p>Hai Phong Devil</p>
-        </div>
-
-        <p style="margin-bottom: 20px; font-weight: 300;">Link-List</p>
-
-        <div class="link-list">
-            <a href="#" class="link-item">
-                <span>🔵 Link của tôi (PNG)</span>
-                <span>&gt;</span>
-            </a>
-            <a href="#" class="link-item">
-                <span>🔥 WEBSITE CỦA TÔI 🔥</span>
-                <span>&gt;</span>
-            </a>
-            <a href="#" class="link-item">
-                <span>🔥 FACEBOOK</span>
-                <span>&gt;</span>
-            </a>
-            <a href="#" class="link-item">
-                <span>🔥 LINK-BTN</span>
-                <span>&gt;</span>
-            </a>
-        </div>
+  <div class="container">
+    <div class="avatar-frame">
+      <img src="assets/avatar.jpg" alt="Ảnh đại diện của Trần Việt Anh" class="avatar" />
+      <img src="assets/frame.png" alt="Khung viền ảnh đại diện" class="avatar-border" />
+    </div>
+    
+    <div class="name">
+      Trần Việt Anh
+      <img src="./assets/verified.png" alt="Huy hiệu xác minh" class="verified-badge" />
     </div>
 
-    <script>
-        // Script tạo tuyết rơi ngẫu nhiên
-        function createSnow() {
-            const container = document.getElementById('snow-container');
-            const flake = document.createElement('div');
-            const size = Math.random() * 5 + 2 + 'px';
-            
-            flake.classList.add('snowflake');
-            flake.style.left = Math.random() * 100 + '%';
-            flake.style.width = size;
-            flake.style.height = size;
-            flake.style.animationDuration = Math.random() * 3 + 2 + 's';
-            flake.style.opacity = Math.random();
-            
-            container.appendChild(flake);
-            
-            setTimeout(() => {
-                flake.remove();
-            }, 5000);
-        }
+    <div class="info">
+      Thiết kế website theo yêu cầu<br>
+      Bán và share source code<br>
+      Cần source code? Inbox Zalo mình<br>
+      <button class="button" onclick="location.href='https://zalo.me/'">
+        <i>Zalo: 0388838940</i>
+      </button>
+    </div>
 
-        setInterval(createSnow, 100);
-    </script>
+    <div class="button-container">
+      <button class="button" onclick="location.href='https://t.me/'">
+        <i class="fab fa-telegram"></i> Telegram
+      </button>
+      <button class="button" onclick="location.href='https://www.facebook.com/'">
+        <i class="fab fa-facebook"></i> Facebook
+      </button>
+      <button class="button" onclick="location.href='https://www.tiktok.com/@vanh.love.it_11'">
+        <i class="fab fa-tiktok"></i> TikTok
+      </button>
+      <button class="button" onclick="location.href='https://github.com/'">
+        <i class="fab fa-github"></i> GitHub
+      </button>
+      <button class="button" onclick="location.href='https://qrcode-nl6s.onrender.com/'">
+        <i class="fa fa-qrcode"></i> Web Tạo Mã QR
+      </button>
+    </div>
+
+    <hr class="divider" />
+
+    <div class="donate-section">
+      <h3>Ủng hộ mình qua QR Code</h3>
+      <img src="assets/qr_vanh.jpg" alt="QR Code Donate" class="qr-code" />
+      <p class="bank-info">
+        NGÂN HÀNG: MB Bank<br>
+        STK: 83862711089999<br>
+        TÊN: TRAN VIET ANH
+      </p>
+      <button class="button" id="download-qr-btn">
+        <i class="fas fa-download"></i> Tải xuống QR
+      </button>
+    </div>
+  </div>
+
+  <button class="music-btn" id="music-btn">
+    <i class="fas fa-play"></i>
+  </button>
+
+  <audio id="background-music" loop>
+    <source src="assets/music.mp3" type="audio/mpeg" />
+  </audio>
+
+  <script>
+    const musicBtn = document.getElementById('music-btn');
+    const music = document.getElementById('background-music');
+    const musicIcon = musicBtn.querySelector('i');
+
+    musicBtn.addEventListener('click', () => {
+      if (music.paused) {
+        music.play().catch(error => {
+          console.error('Lỗi phát nhạc:', error);
+        });
+        musicIcon.classList.replace('fa-play', 'fa-pause');
+      } else {
+        music.pause();
+        musicIcon.classList.replace('fa-pause', 'fa-play');
+      }
+    });
+
+    const downloadBtn = document.getElementById('download-qr-btn');
+
+    downloadBtn.addEventListener('click', () => {
+      const link = document.createElement('a');
+      link.href = 'assets/QR_Vanh.jpg';
+      link.download = 'QR_Donate_TranVietAnh.jpg';
+      link.click();
+    });
+  </script>
 </body>
 </html>

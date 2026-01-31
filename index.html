@@ -3,9 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Nguyễn Việt Hoàng - Thiết kế Website & Share Source Code" />
   <meta name="keywords" content="thiết kế website, bán source code, share source code, Nguyễn Việt Hoàng, lập trình web" />
   <meta name="author" content="Nguyễn Việt Hoàng" />
   <title>Nguyễn Việt Hoàng - Thiết kế Website</title>
+  
   <link rel="stylesheet" href="style.css" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@600;800&display=swap" rel="stylesheet" />
@@ -13,54 +15,54 @@
 <body>
   <div class="container">
     <div class="avatar-frame">
-      <img src="assets/avatar.jpg" alt="Ảnh đại diện của Nguyễn Việt Hoàng" class="avatar" />
-      <img src="assets/frame.png" alt="Khung viền ảnh đại diện" class="avatar-border" />
+      <img src="input_file_1.png" alt="Ảnh đại diện Nguyễn Việt Hoàng" class="avatar" />
+      <img src="input_file_0.png" alt="Khung viền rồng" class="avatar-border" />
     </div>
     
     <div class="name">
       Nguyễn Việt Hoàng
-      <img src="./assets/verified.png" alt="Huy hiệu xác minh" class="verified-badge" />
+      <img src="input_file_3.png" alt="Huy hiệu xác minh" class="verified-badge" />
     </div>
 
     <div class="info">
-      Thiết kế website theo yêu cầu<br>
-      Bán và share source code<br>
-      Inbox Zalo mình<br>
-      <button class="button" onclick="location.href='https://zalo.me/84788265513'">
-        <i>Zalo: 0788265513</i>
-      </button>
+      <p>Thiết kế website theo yêu cầu</p>
+      <p>Bán và share source code</p>
+      <p>Inbox Zalo mình</p>
+      <a href="https://zalo.me/84788265513" target="_blank" class="button">
+        <i class="fas fa-comment-dots"></i> Zalo: 0788265513
+      </a>
     </div>
 
     <div class="button-container">
-      <button class="button" onclick="location.href='https://t.me/'">
+      <a href="https://t.me/kunmmo2006" target="_blank" class="button">
         <i class="fab fa-telegram"></i> Telegram
-      </button>
-      <button class="button" onclick="location.href='https://www.facebook.com/nvh12072006'">
+      </a>
+      <a href="https://www.facebook.com/nvh12072006" target="_blank" class="button">
         <i class="fab fa-facebook"></i> Facebook
-      </button>
-      <button class="button" onclick="location.href='https://www.tiktok.com/@hpdbox'">
+      </a>
+      <a href="https://m.me/nvh12072006" target="_blank" class="button">
+        <i class="fab fa-facebook-messenger"></i> Messenger
+      </a>
+      <a href="https://www.tiktok.com/@hpdbox" target="_blank" class="button">
         <i class="fab fa-tiktok"></i> TikTok
-      </button>
-      <button class="button" onclick="location.href='https://github.com/'">
-        <i class="fab fa-github"></i> GitHub
-      </button>
-      <button class="button" onclick="location.href='https://qrcode-nl6s.onrender.com/'">
+      </a>
+      <a href="https://qrcode-nl6s.onrender.com/" target="_blank" class="button">
         <i class="fa fa-qrcode"></i> Web Tạo Mã QR
-      </button>
+      </a>
     </div>
 
     <hr class="divider" />
 
     <div class="donate-section">
       <h3>Ủng hộ mình qua QR Code</h3>
-      <img src="assets/qr_vanh.jpg" alt="QR Code Donate" class="qr-code" />
-      <p class="bank-info">
-        NGÂN HÀNG: Techcombank<br>
-        STK: 3120720060<br>
-        TÊN: NGUYEN VIET HOANG
-      </p>
+      <img src="input_file_2.png" alt="QR Code Donate Nguyễn Việt Hoàng" class="qr-code" />
+      <div class="bank-info">
+        <p>NGÂN HÀNG: <strong>Techcombank</strong></p>
+        <p>STK: <strong>3120720060</strong></p>
+        <p>TÊN: <strong>NGUYEN VIET HOANG</strong></p>
+      </div>
       <button class="button" id="download-qr-btn">
-        <i class="fas fa-download"></i> Tải xuống QR
+        <i class="fas fa-download"></i> Tải xuống QR của Hoàng
       </button>
     </div>
   </div>
@@ -70,7 +72,7 @@
   </button>
 
   <audio id="background-music" loop>
-    <source src="assets/music.mp3" type="audio/mpeg" />
+    <source src="input_file_4.mp3" type="audio/mpeg" />
   </audio>
 
   <script>
@@ -80,9 +82,7 @@
 
     musicBtn.addEventListener('click', () => {
       if (music.paused) {
-        music.play().catch(error => {
-          console.error('Lỗi phát nhạc:', error);
-        });
+        music.play();
         musicIcon.classList.replace('fa-play', 'fa-pause');
       } else {
         music.pause();
@@ -90,13 +90,13 @@
       }
     });
 
-    const downloadBtn = document.getElementById('download-qr-btn');
-
-    downloadBtn.addEventListener('click', () => {
+    document.getElementById('download-qr-btn').addEventListener('click', () => {
       const link = document.createElement('a');
-      link.href = 'assets/QR_Vanh.jpg';
-      link.download = 'QR_Donate_TranVietAnh.jpg';
+      link.href = 'input_file_2.png';
+      link.download = 'QR_Donate_NguyenVietHoang.png';
+      document.body.appendChild(link);
       link.click();
+      document.body.removeChild(link);
     });
   </script>
 </body>

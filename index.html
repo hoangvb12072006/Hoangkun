@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Nguyễn Việt Hoàng - Thiết kế Website & Share Source Code" />
-  <meta name="keywords" content="thiết kế website, bán source code, share source code, Nguyễn Việt Hoàng, lập trình web" />
   <meta name="author" content="Nguyễn Việt Hoàng" />
   <title>Nguyễn Việt Hoàng - Thiết kế Website</title>
   
@@ -15,13 +14,13 @@
 <body>
   <div class="container">
     <div class="avatar-frame">
-      <img src="input_file_1.png" alt="Ảnh đại diện Nguyễn Việt Hoàng" class="avatar" />
-      <img src="input_file_0.png" alt="Khung viền rồng" class="avatar-border" />
+      <img src="IMG_6181.jpg" alt="Avatar" class="avatar" />
+      <img src="frame.png" alt="Khung" class="avatar-border" />
     </div>
     
     <div class="name">
       Nguyễn Việt Hoàng
-      <img src="input_file_3.png" alt="Huy hiệu xác minh" class="verified-badge" />
+      <img src="verified.png" alt="Tích xanh" class="verified-badge" />
     </div>
 
     <div class="info">
@@ -55,14 +54,14 @@
 
     <div class="donate-section">
       <h3>Ủng hộ mình qua QR Code</h3>
-      <img src="input_file_2.png" alt="QR Code Donate Nguyễn Việt Hoàng" class="qr-code" />
+      <img src="IMG_6180.jpg" alt="QR Bank" class="qr-code" />
       <div class="bank-info">
         <p>NGÂN HÀNG: <strong>Techcombank</strong></p>
         <p>STK: <strong>3120720060</strong></p>
         <p>TÊN: <strong>NGUYEN VIET HOANG</strong></p>
       </div>
       <button class="button" id="download-qr-btn">
-        <i class="fas fa-download"></i> Tải xuống QR của Hoàng
+        <i class="fas fa-download"></i> Tải xuống QR
       </button>
     </div>
   </div>
@@ -72,7 +71,7 @@
   </button>
 
   <audio id="background-music" loop>
-    <source src="input_file_4.mp3" type="audio/mpeg" />
+    <source src="music.mp3" type="audio/mpeg" />
   </audio>
 
   <script>
@@ -92,11 +91,9 @@
 
     document.getElementById('download-qr-btn').addEventListener('click', () => {
       const link = document.createElement('a');
-      link.href = 'input_file_2.png';
-      link.download = 'QR_Donate_NguyenVietHoang.png';
-      document.body.appendChild(link);
+      link.href = 'IMG_6180.jpg';
+      link.download = 'QR_NguyenVietHoang.jpg';
       link.click();
-      document.body.removeChild(link);
     });
   </script>
 </body>

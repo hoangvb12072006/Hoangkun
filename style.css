@@ -297,12 +297,12 @@ html, body {
 }
 
 #particleCanvas {
-    position: fixed; /* Giữ canvas cố định khi cuộn trang */
+    position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;    /* Phủ hết chiều ngang màn hình */
-    height: 100vh;   /* Phủ hết chiều cao màn hình */
+    width: 100vw;    /* Phủ toàn bộ chiều ngang */
+    height: 100vh;   /* Phủ toàn bộ chiều cao */
     z-index: -1; 
-    background: #000;
+    background: #000 !important; /* Nền đen tuyệt đối */
     display: block;
 }

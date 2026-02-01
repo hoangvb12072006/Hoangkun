@@ -296,12 +296,12 @@ html, body {
 }
 
 #particleCanvas {
-    position: fixed;
+    position: fixed; /* Giữ canvas cố định khi cuộn trang */
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    width: 100vw;    /* Phủ hết chiều ngang màn hình */
+    height: 100vh;   /* Phủ hết chiều cao màn hình */
     z-index: -1; 
-    /* Sửa 3: Cho canvas màu đen để làm nền cho toàn trang */
     background: #000;
+    display: block;
 }

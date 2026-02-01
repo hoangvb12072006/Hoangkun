@@ -11,8 +11,9 @@
 
 html, body {
   height: 100%;
-  /* Sửa 1: Quan trọng nhất - để transparent để thấy chấm bay xuyên suốt trang */
-  background: transparent;
+  margin: 0;
+  padding: 0;
+  background: transparent !important; /* Thêm !important để ép nó trong suốt hẳn */
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: white;
   text-align: center;

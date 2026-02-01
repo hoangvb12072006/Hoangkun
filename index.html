@@ -101,21 +101,14 @@
   </script>
 
   <script>
-    const canvas = document.getElementById('particleCanvas');
-    const ctx = canvas.getContext('2d');
+const canvas = document.getElementById('particleCanvas');
+const ctx = canvas.getContext('2d');
 
-  const canvas = document.getElementById('particleCanvas');
-    const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 
-    // Hàm này giúp canvas luôn full màn hình dù bạn dùng máy tính hay điện thoại
-    function resizeCanvas() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-    }
-
-    window.addEventListener('resize', resizeCanvas);
-    resizeCanvas(); // Chạy ngay khi load trang
-    let particlesArray = [];
+let particlesArray = [];
+    
     // Màu xanh và hồng theo đúng phong cách Cyber của bạn
     const colors = ['#00f2ff', '#ff00ff', '#ffffff'];
 
